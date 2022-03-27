@@ -88,6 +88,7 @@ function singleGame(){
       (seven.dataset.figure == five.dataset.figure && five.dataset.figure == three.dataset.figure && five.dataset.figure == "cross")
 
       ) {
+         gameOver = true;
          fields.forEach(field => removeEventListener("click",handle));
          setTimeout(function () {
             fields.forEach(field => {
@@ -98,9 +99,9 @@ function singleGame(){
             resultRonaldo.style.display = "flex";
             gameboard.style.display = "none";
             
-            gameOver = true;
+            
             return;
-         },200)
+         },0)
       }
 // ------------------------------------- CIRCLES WIN --------------------------------------
       if ((one.dataset.figure == two.dataset.figure && three.dataset.figure == two.dataset.figure && two.dataset.figure == "circle") ||
@@ -120,6 +121,7 @@ function singleGame(){
       (seven.dataset.figure == five.dataset.figure && five.dataset.figure == three.dataset.figure && five.dataset.figure == "circle")
 
       )  {
+         gameOver = true;
          fields.forEach(field => removeEventListener("click",handle));
          setTimeout(function () {
             fields.forEach(field => {
@@ -130,9 +132,9 @@ function singleGame(){
             resultMessi.style.display = "flex";
             gameboard.style.display = "none";
 
-            gameOver = true;
+            
             return;
-         },200)
+         },0)
       }
 // -------------------------------DRAW-----------------------------
       if ((one.dataset.figure == "circle" || one.dataset.figure == "cross") &&
