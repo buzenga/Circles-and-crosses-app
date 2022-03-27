@@ -158,7 +158,7 @@ function singleGame(){
             resultRonaldo.style.display = "none";
             gameboard.style.display = "none";
             return;
-         },200)
+         },400)
       }
 }))}
 
