@@ -3,7 +3,12 @@ const start = document.querySelector("button");
 const starter = document.querySelector(".starter");
 const gameboard = document.querySelector(".gameboard");
 const resultMessi = document.querySelector(".result_messi");
-const resultRonaldo = document.querySelector(".result_messi");
+const resultRonaldo = document.querySelector(".result_ronaldo");
+const resultDraw = document.querySelector(".result_draw")
+const restart = document.querySelectorAll(".restart");
+const messiPlaying = document.querySelector(".current_player_messi");
+const ronaldoPlaying = document.querySelector(".current_player_ronaldo");
+// const restartRonaldo = document.querySelector(".ronaldoBtn");
 
 const one = document.querySelector(".one")
 const two = document.querySelector(".two")
@@ -24,6 +29,10 @@ start.addEventListener("click", () => {
    gameboard.style.display = "flex";
 
 })
+restart.forEach(btn => btn.addEventListener("click", () => {
+   window.location.reload();
+   // alert("dziala")
+}))
 
 // FUNCTIONS
 function singleGame(){
@@ -37,6 +46,15 @@ function singleGame(){
    fields.forEach(field => field.addEventListener("click", function handle(e) {
       field.removeEventListener("click",handle);
       field.classList.remove("hover_on")
+
+      if (figureSwitch == "circle") {
+         messiPlaying.classList.remove("currently_playing");
+         ronaldoPlaying.classList.add("currently_playing");
+      }
+      if (figureSwitch == "cross") {
+         ronaldoPlaying.classList.remove("currently_playing");
+         messiPlaying.classList.add("currently_playing");
+      }
 
       switch(figureSwitch) {
          case "circle":
@@ -77,12 +95,12 @@ function singleGame(){
                field.dataset.figure = "";
                field.classList.add("hover_on")
             })
-            start.style.display ="flex";
+            resultRonaldo.style.display = "flex";
+            gameboard.style.display = "none";
             
             gameOver = true;
-            alert("o kurwa wygral krzyzk");
             return;
-         },500)
+         },200)
       }
 // ------------------------------------- CIRCLES WIN --------------------------------------
       if ((one.dataset.figure == two.dataset.figure && three.dataset.figure == two.dataset.figure && two.dataset.figure == "circle") ||
@@ -114,7 +132,7 @@ function singleGame(){
 
             gameOver = true;
             return;
-         },500)
+         },200)
       }
 // -------------------------------DRAW-----------------------------
       if ((one.dataset.figure == "circle" || one.dataset.figure == "cross") &&
@@ -135,10 +153,12 @@ function singleGame(){
                field.dataset.figure = "";
                field.classList.add("hover_on")
             })
-            start.style.display ="flex";
-            alert("remisik");
+            resultDraw.style.display = "flex";
+            resultMessi.style.display = "none";
+            resultRonaldo.style.display = "none";
+            gameboard.style.display = "none";
             return;
-         },500)
+         },200)
       }
 }))}
 

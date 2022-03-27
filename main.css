@@ -14,13 +14,14 @@ button {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background-color: #4861eb;
+  background-color: #e4e6f5;
   border: 2px solid black;
   border-radius: .4em;
   width: 80px;
   -webkit-transition: all .8s ease-in-out;
   transition: all .8s ease-in-out;
   font-family: 'Smokum', cursive;
+  font-weight: bold;
 }
 
 button:hover {
@@ -59,7 +60,7 @@ button:hover {
   z-index: 1;
   padding: 1em;
   border-radius: .5em;
-  width: 60%;
+  width: 40%;
   gap: 1em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -107,7 +108,6 @@ button:hover {
 }
 
 .result_ronaldo {
-  visibility: hidden;
   position: absolute;
   z-index: 1;
   padding: 1em;
@@ -132,6 +132,35 @@ button:hover {
 
 .result_ronaldo .img {
   content: url(img/portugal.png);
+  width: 150px;
+  height: auto;
+}
+
+.result_draw {
+  position: absolute;
+  z-index: 1;
+  padding: 1em;
+  border-radius: .5em;
+  background-color: rgba(255, 255, 255, 0.637);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.result_draw .img {
+  content: url(img/giani.png);
   width: 150px;
   height: auto;
 }
@@ -162,8 +191,10 @@ button:hover {
   display: -ms-flexbox;
   display: flex;
   gap: 10px;
-  top: 15px;
-  left: 40px;
+  bottom: 15px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .gameboard .game_nav .current_player_messi {
