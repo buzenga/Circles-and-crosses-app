@@ -1,5 +1,9 @@
 const fields = document.querySelectorAll(".field");
 const start = document.querySelector("button");
+const starter = document.querySelector(".starter");
+const gameboard = document.querySelector(".gameboard");
+const resultMessi = document.querySelector(".result_messi");
+const resultRonaldo = document.querySelector(".result_messi");
 
 const one = document.querySelector(".one")
 const two = document.querySelector(".two")
@@ -11,42 +15,39 @@ const seven = document.querySelector(".seven")
 const eight = document.querySelector(".eight")
 const nine = document.querySelector(".nine")
 
-
-
-// const test = document.querySelector(".field");
-// test.addEventListener("click", () => {
-//    test.dataset.figure = "siema";
-// })
+let gameOver = false;
 
 
 start.addEventListener("click", () => {
    singleGame()
-   start.style.display ="none";
+   starter.style.display ="none";
+   gameboard.style.display = "flex";
 
 })
 
 // FUNCTIONS
 function singleGame(){
    let figureSwitch = "circle";
-   
-   fields.forEach(field => 
-      field.classList.add("hover_on")
-   )
+
+   fields.forEach(field => {
+      field.classList.add("hover_on");
+      field.style.content = "";
+   })
 
    fields.forEach(field => field.addEventListener("click", function handle(e) {
       field.removeEventListener("click",handle);
       field.classList.remove("hover_on")
-      // field.dataset.figure = figureSwitch;
 
-      console.log("przed: " + figureSwitch)
       switch(figureSwitch) {
          case "circle":
-            field.style.backgroundColor = "green";
+            
+            field.style.content = "url(img/messi.png";
             field.dataset.figure = figureSwitch;
             figureSwitch = "cross"; 
             break;
          case "cross":
-            field.style.backgroundColor = "red";
+
+            field.style.content = "url(img/ronaldo.png";
             field.dataset.figure = figureSwitch;
             figureSwitch = "circle"; 
             break;    
@@ -69,7 +70,19 @@ function singleGame(){
       (seven.dataset.figure == five.dataset.figure && five.dataset.figure == three.dataset.figure && five.dataset.figure == "cross")
 
       ) {
-         alert("o kurwa wygral krzyzk");
+         fields.forEach(field => removeEventListener("click",handle));
+         setTimeout(function () {
+            fields.forEach(field => {
+               field.style.backgroundColor = "transparent";
+               field.dataset.figure = "";
+               field.classList.add("hover_on")
+            })
+            start.style.display ="flex";
+            
+            gameOver = true;
+            alert("o kurwa wygral krzyzk");
+            return;
+         },500)
       }
 // ------------------------------------- CIRCLES WIN --------------------------------------
       if ((one.dataset.figure == two.dataset.figure && three.dataset.figure == two.dataset.figure && two.dataset.figure == "circle") ||
@@ -88,9 +101,47 @@ function singleGame(){
 
       (seven.dataset.figure == five.dataset.figure && five.dataset.figure == three.dataset.figure && five.dataset.figure == "circle")
 
-      ) {
-         alert("o kurwa kolko wygralo");
+      )  {
+         fields.forEach(field => removeEventListener("click",handle));
+         setTimeout(function () {
+            fields.forEach(field => {
+               field.style.backgroundColor = "transparent";
+               field.dataset.figure = "";
+               field.classList.add("hover_on")
+            })
+            resultMessi.style.display = "flex";
+            gameboard.style.display = "none";
+
+            gameOver = true;
+            return;
+         },500)
+      }
+// -------------------------------DRAW-----------------------------
+      if ((one.dataset.figure == "circle" || one.dataset.figure == "cross") &&
+      (two.dataset.figure == "circle" || two.dataset.figure == "cross") &&
+      (three.dataset.figure == "circle" || three.dataset.figure == "cross") &&
+      (four.dataset.figure == "circle" || four.dataset.figure == "cross") &&
+      (five.dataset.figure == "circle" || five.dataset.figure == "cross") &&
+      (six.dataset.figure == "circle" || six.dataset.figure == "cross") &&
+      (seven.dataset.figure == "circle" || seven.dataset.figure == "cross") &&
+      (eight.dataset.figure == "circle" || eight.dataset.figure == "cross") &&
+      (nine.dataset.figure == "circle" || nine.dataset.figure == "cross") &&
+      gameOver != true) {
+
+         fields.forEach(field => removeEventListener("click",handle));
+         setTimeout(function () {
+            fields.forEach(field => {
+               field.style.backgroundColor = "transparent";
+               field.dataset.figure = "";
+               field.classList.add("hover_on")
+            })
+            start.style.display ="flex";
+            alert("remisik");
+            return;
+         },500)
       }
 }))}
+
+
 
 
